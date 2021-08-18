@@ -1,5 +1,3 @@
-
-
 var proofContractABI = [
     { 
         "anonymous": false, 
@@ -92,3 +90,5 @@ var proofContractABI = [
         "type": "function" 
     } 
 ];
+
+var proofContractAddress = "0x2cfb5344Ca42d1aac9Ca89A6eFe3bc90b9425B60";

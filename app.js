@@ -7,10 +7,7 @@ var Web3 = require("web3");
 
 var privateKey = '1b2d22bb5435377eebf98ac139921852997c53499dd6fb528da3a286dfe867f9';
 var publicAddress = "0xD2Af84003cB8BF44E712747bb38526Afa74CE075";
-var contractAddress = "0x2cfb5344Ca42d1aac9Ca89A6eFe3bc90b9425B60";
-
-web3 = new Web3(new Web3.providers.WebsocketProvider("wss://ropsten.infura.io/ws/v3/0293d3aaf35b451a934cf9cfe0a62ee3"));
-var proof = new web3.eth.Contract([
+var proofContractABI = [
     { 
         "anonymous": false, 
         "inputs": [ 
@@ -101,7 +98,12 @@ var proof = new web3.eth.Contract([
         "stateMutability": "view", 
         "type": "function" 
     } 
-], contractAddress);
+];
+var proofContractAddress = "0x2cfb5344Ca42d1aac9Ca89A6eFe3bc90b9425B60";
+
+// new Web3.providers.WebsocketProvider("wss://ropsten.infura.io/ws/v3/0293d3aaf35b451a934cf9cfe0a62ee3")
+web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/0293d3aaf35b451a934cf9cfe0a62ee3"));
+var proof = new web3.eth.Contract(proofContractABI, proofContractAddress);
 
 server.listen(8080);
 
@@ -124,7 +126,7 @@ app.get("/submit", function(req, res) {
     // });
     var Tx = {
         from: publicAddress,
-        to: contractAddress,
+        to: proofContractAddress,
         gas: 2000000,
         // gasPrice: String(gasPrice),
         data: encodeData
@@ -162,9 +164,10 @@ app.get("/getInfo", function(req, res) {
 
 
 
-
+var web3socket = new Web3(new Web3.providers.WebsocketProvider("wss://ropsten.infura.io/ws/v3/0293d3aaf35b451a934cf9cfe0a62ee3"));
+var proofsocket = new web3socket.eth.Contract(proofContractABI, proofContractAddress);
 // Прослушивание события контракта и отправка его по сокету всем подписанным пользователям
-proof.events.logFileAdded({fromBlock: "latest"}, function(error, event){
+proofsocket.events.logFileAdded({fromBlock: "latest"}, function(error, event){
     if(!error) {
         console.log(event);
         io.send(event);
