@@ -1,55 +1,151 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta charset="utf-8">
+ <head>
+  <meta charset="utf-8">
+  <title>UIM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Roboto:wght@100&display=swap" rel="stylesheet">
 
-        <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./../css/style.css">
 
-        <title>DApp Aparin & Antonov</title>
-    </head>
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 offset-md-3 text-xs-center">
-                    <br>
-                    <h3>Загрузить файл</h3>
-                    <br>
-                    <div>
-                        <div class="form-group">
-                            <label class="custom-file text-xs-left">
-                                <input type="file" class="customfile-input" id="file">
-                                <span class="custom-file-control"></span>
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label for="owner">Введите имя владельца</label>
-                            <input type="text" class="form-control" id="owner">
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Введите короткое описание файла</label>
-                            <input type="text" class="form-control" id="description">
-                        </div>
-                        <button onclick="submit()" class="btn btn-primary">Отправить</button>
-                        <button onclick="getInfo()" class="btn btn-primary">Получить информацию</button>
-                        <br><br>
-                        <div class="alert alert-info" role="alert" id="message">
-                            Вы можете сохранить сведения о файле или получить их.
-                        </div>
+ </head>
+ <body>
+
+     <header id="header" class="header">
+         <div class="container">
+             <div class="nav">
+                 <div class="logo">
+                    <a href="#" style="font-weight: 900; color:rgba(72, 73, 94, 1);" >DApp</a> 
+                    <a href="#" >File</a> 
+                 </div>
+               
+                    <ul class="menu">
+                    <li>
+                        <a href="#">Главная</a>
+                    </li>
+                    <li>
+                        <a href="#rectangle1">Проверить файл</a>
+                    </li>
+                    <li>
+                        <a href="#rectangle2">Создать запись</a>
+                    </li>
+                    </ul>
+                
+               
+             </div>
+             <hr>
+                
+                <div class="cr">
+                    <div class="mid">
+                    
+                         <p>Проверяйте,<br>
+                         записывайте,<br>
+                         еще что-то<br>
+                         делайте, а что<br>
+                         именно уже не<br>
+                         важно!</p>
                     </div>
+                        <div class="but">
+                            <a href="#rectangle1">Проверить</a>
+                        </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6 offset-md-3 text-xs-center">
-                    <br>
-                    <h3>Транзакции, подтвержденные недавно</h3>
-                    <br>
-                    <ol id="events-list">Транзакции не найдены</ol>
+
+         </div>
+
+     </header>
+
+
+     <section id="section" class="section">
+         <div class="section1">
+         <div id="rectangle1">
+        <div class="col-md-6 offset-md-3 text-xs-center">
+        <div class="mr">
+            <br>
+            <h3>Загрузить файл</h3>
+            <br>
+            <div>
+                <div class="form-group">
+                    <label class="custom-file text-xs-left">
+                        <input type="file" class="customfile-input" id="file-to-check">
+                        <span class="custom-file-control"></span>
+                    </label>
                 </div>
+               <br>
+                <button onclick="getInfo()" class="btn-btn-primary">Получить информацию</button>
+                <br><br>
+
+            </div>
+               
             </div>
         </div>
-        <script type="text/javascript" src="/js/sha1.min.js"></script>
-        <script type="text/javascript" src="/js/jquery.min.js"></script>
-        <script type="text/javascript" src="/js/socket.io.min.js"></script>
-        <script type="text/javascript" src="/js/main.js"></script>
-    </body>
+    </div>
+    <div id="rectangle4">
+        <div id="infasservera">
+            <p>Здесь будет информация о файле</p>
+        </div>
+       
+    </div>
+    </div>
+
+
+<div class="section2">
+    <div id="rectangle2">
+        <div id="fileperenos">
+        <div class="form-group">
+            <label class="custom-file text-xs-left">
+                <input type="file" class="customfile-input" id="file-to-load">
+                <span class="custom-file-control"></span>
+            </label>
+        </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="owner">Введите имя владельца<br>
+                <input type="text" class="form-control" id="owner">
+            </label>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="description">Введите короткое описание файла<br>
+                <input type="text" class="form-control" id="description">
+            </label>
+        </div>
+        <br>
+        <button onclick="submit()" class="btn-btn-primary">Отправить</button>
+    </div>
+    <div id="rectangle3">
+        <p id="file-info">Здесь будут результаты записи</p>
+    </div>
+</div>
+<hr>
+<div class="section3">
+    <div class="row">
+        <div class="viravnivanie">
+        <div class="col-md-6 offset-md-3 text-xs-center">
+            <br>
+            <h3>Транзакции, подтвержденные недавно</h3>
+            <br>
+            <ol id="events-list">Транзакции не найдены</ol>
+        </div>
+    </div>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="./../js/sha1.min.js"></script>
+<script type="text/javascript" src="./../js/jquery.min.js"></script>
+<script type="text/javascript" src="./../js/socket.io.min.js"></script>
+<script type="text/javascript" src="./../js/main.js"></script>
+     </section>
+
+
+  <footer id="footer" class="footer">
+<div id="rectangle5">
+    <p>© 2021 Aparin & Antonov CORP. All Rights Reserved</p>
+</div>
+  </footer>
+  
+ </body>
 </html>

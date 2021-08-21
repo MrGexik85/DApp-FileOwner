@@ -2,7 +2,7 @@ var host = "http://localhost:8080";
 
 // Нажатие кнопки "Отправить"
 function submit () {
-    var file = document.getElementById("file").files[0];
+    var file = document.getElementById("file-to-load").files[0];
     if(file) {
         var owner = document.getElementById("owner").value;
         var description = document.getElementById("description").value;
@@ -14,9 +14,9 @@ function submit () {
                 var hash = sha1(event.target.result);
                 $.get("/submit?hash=" + hash + "&owner=" + owner + "&description=" + description, function(data) {
                     if(data == "Error") {
-                        $("#message").text("Произошла ошибка");
+                        $("#rectangle3").text("<p>Произошла ошибка</p>");
                     } else {
-                        $("#message").html("Хэш транзакции: " + data);
+                        $("#rectangle3").html("<p>Хэш транзакции: " + data + "</p>");
                     }
                 });
             };
@@ -29,16 +29,16 @@ function submit () {
 
 // Нажатие кнопки "Получить информацию"
 function getInfo() {
-    var file = document.getElementById("file").files[0];
+    var file = document.getElementById("file-to-check").files[0];
     if(file) {
         var reader = new FileReader();
         reader.onload = function (event) {
             var hash = sha1(event.target.result);
             $.get("/getInfo?hash=" + hash, function(data) {
                 if(data[0] == 0 && data[1] == "") {
-                    $("#message").html("Нет информации о таком файле");
+                    $("#infasservera").html("<p>Информация не найдена</p>");
                 } else {
-                    $("#message").html("Метка времени: " + data[0] + "\nВладелец: " + data[1] + "\nОписание: " + data[2]);
+                    $("#infasservera").html("<p>Информация найдена<br>Метка времени: " + data[0] + "<br>Владелец: " + data[1] + "<br>Описание: " + data[2] + "</p>");
                 }
             });
         };
@@ -51,13 +51,13 @@ function getInfo() {
 var socket = io.connect(window.location.hostname + ":8080");
 socket.on("connect", () => {
     socket.on("message", (msg) => {
-        console.log($("#events-list").text);
+        // console.log($("#events-list").text);
         if($("#events-list").text() == "Транзакции не найдены") {
-            console.log(msg.transactionHash, msg.returnValues.owner, msg.returnValues.description, msg.returnValues.fileHash);
-            $("#events-list").html("<li>Хэш транзакции: " + msg.transactionHash + " Владелец: " + msg.returnValues.owner + " Описание: " + msg.returnValues.description + " Хэш файла: " + msg.returnValues.fileHash + "</li>");
+            // console.log(msg.transactionHash, msg.returnValues.owner, msg.returnValues.description, msg.returnValues.fileHash);
+            $("#events-list").html("<li>Хэш транзакции: " + msg.transactionHash + "<br><br>Владелец: " + msg.returnValues.owner + "<br><br>Описание: " + msg.returnValues.description + "<br><br>Хэш файла: " + msg.returnValues.fileHash + "</li><br>");
         } else {
-            console.log(msg.transactionHash, msg.returnValues.owner, msg.returnValues.description, msg.returnValues.fileHash);
-            $("#events-list").prepend("<li>Хэш транзакции: " + msg.transactionHash + " Владелец: " + msg.returnValues.owner + " Описание: " + msg.returnValues.description + " Хэш файла: " + msg.returnValues.fileHash + "</li>");
+            // console.log(msg.transactionHash, msg.returnValues.owner, msg.returnValues.description, msg.returnValues.fileHash);
+            $("#events-list").prepend("<li>Хэш транзакции: " + msg.transactionHash + "<br><br>Владелец: " + msg.returnValues.owner + "<br><br>Описание: " + msg.returnValues.description + "<br><br>Хэш файла: " + msg.returnValues.fileHash + "</li><br>");
         }
     });
 });
