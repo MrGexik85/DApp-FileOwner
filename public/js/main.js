@@ -54,10 +54,10 @@ socket.on("connect", () => {
         // console.log($("#events-list").text);
         if($("#events-list").text() == "Транзакции не найдены") {
             // console.log(msg.transactionHash, msg.returnValues.owner, msg.returnValues.description, msg.returnValues.fileHash);
-            $("#events-list").html("<li>Хэш транзакции: " + msg.transactionHash + "<br><br>Владелец: " + msg.returnValues.owner + "<br><br>Описание: " + msg.returnValues.description + "<br><br>Хэш файла: " + msg.returnValues.fileHash + "</li><br>");
+            $("#events-list").html("<li>Хэш транзакции: " + msg.transactionHash + "<br><br>Успешна ли запись: " + msg.returnValues.success + "<br><br>Владелец: " + msg.returnValues.owner + "<br><br>Описание: " + msg.returnValues.description + "<br><br>Хэш файла: " + msg.returnValues.fileHash + "</li><br>");
         } else {
             // console.log(msg.transactionHash, msg.returnValues.owner, msg.returnValues.description, msg.returnValues.fileHash);
-            $("#events-list").prepend("<li>Хэш транзакции: " + msg.transactionHash + "<br><br>Владелец: " + msg.returnValues.owner + "<br><br>Описание: " + msg.returnValues.description + "<br><br>Хэш файла: " + msg.returnValues.fileHash + "</li><br>");
+            $("#events-list").prepend("<li>Хэш транзакции: " + msg.transactionHash + "<br><br>Успешна ли запись: " + msg.returnValues.success + "<br><br>Владелец: " + msg.returnValues.owner + "<br><br>Описание: " + msg.returnValues.description + "<br><br>Хэш файла: " + msg.returnValues.fileHash + "</li><br>");
         }
     });
 });
